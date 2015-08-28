@@ -1,7 +1,9 @@
 all: ecmp-test
 
+CC:=gcc
+
 ecmp-test: ecmp-test.c
-	gcc -Wall -W -g -o $@ $^
+	$(CC) --std=c11 -o $@ $^
 
 clean:
 	rm -f ecmp-test
@@ -9,7 +11,4 @@ clean:
 test: ecmp-test
 	./ecmp-test
 
-debug: ecmp-test
-	gdb ./ecmp-test
-
-.PHONY: all clean test debug
+.PHONY: all clean test
