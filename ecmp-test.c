@@ -77,13 +77,15 @@ int main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 
-	printf("Receiving: ");
+	printf("Receiving: \e[s");
 	fflush(stdout);
 
 	char buffer[32768];
 	int cnt;
+	unsigned long int total = 0;
 	while ((cnt = read(sockfd, buffer, sizeof(buffer))) > 0) {
-		fputc('.', stdout);
+		total += cnt;
+		printf("\e[u%lu", total);
 		fflush(stdout);
 	}
 
